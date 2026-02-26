@@ -1,0 +1,59 @@
+.venv/
+__pycache__/
+*.pyc
+Présentations
+ZZZ_Old
+Project_GetAround/01-Getaround_analysis.ipynb
+Project_GetAround/GetAround_delay_analysis.ipynb
+images1videosImages&Videos/
+*.mp4
+*.png
+# Créer/éditer le .gitignore
+cat > .gitignore << 'EOF'
+# Médias
+Images&Videos/
+*.mp4
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data
+data/raw/
+*.csv
+*.xlsx
+*.parquet
+
+# Modèles ML (trop volumineux)
+*.pkl
+*.h5
+*.joblib
+models/*.pkl
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Secrets
+.env
+*.key
+credentials.json
+
+# OS
+.DS_Store
+Thumbs.db
+EOFImages&Videos/
