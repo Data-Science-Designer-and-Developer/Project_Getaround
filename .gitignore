@@ -57,3 +57,7 @@ credentials.json
 .DS_Store
 Thumbs.db
 EOFImages&Videos/
+
+mlflow.db
+*.db
+.ipynb_checkpoints/

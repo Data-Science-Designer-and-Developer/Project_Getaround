@@ -6,20 +6,22 @@ import json
 import numpy as np
 import pandas as pd
 
-# ── Load model and feature names ──────────────────────────────────────────────
+# ── Load model and feature names ────────────────────────────────────────
 pipeline = joblib.load("pipeline.pkl")
 
 with open("feature_names.json", "r") as f:
     feature_names = json.load(f)
 
-# ── Initialize app ────────────────────────────────────────────────────────────
+# ── Initialize app ──────────────────────────────────────────────────────
 app = FastAPI(
     title="GetAround Pricing API",
     description="Predicts the optimal rental price per day for a car",
     version="1.0.0"
 )
 
-# ── Input schema ──────────────────────────────────────────────────────────────
+# ── Input schema ────────────────────────────────────────────────────────
+
+
 class PredictInput(BaseModel):
     input: list
 
@@ -30,7 +32,9 @@ class PredictInput(BaseModel):
             }
         }
 
-# ── Root route ────────────────────────────────────────────────────────────────
+# ── Root route ──────────────────────────────────────────────────────────
+
+
 @app.get("/", response_class=HTMLResponse)
 def root():
     return """
@@ -43,19 +47,23 @@ def root():
     </html>
     """
 
-# ── /predict route ────────────────────────────────────────────────────────────
+# ── /predict route ──────────────────────────────────────────────────────
+
+
 @app.post("/predict")
 def predict(data: PredictInput):
     # Convert input to DataFrame with correct column names
     X = pd.DataFrame(data.input, columns=feature_names)
-    
+
     # Make predictions
     predictions = pipeline.predict(X)
-    
+
     # Round to 2 decimals and return as list
     return {"prediction": [round(float(p), 2) for p in predictions]}
 
-# ── /docs route ───────────────────────────────────────────────────────────────
+# ── /docs route ─────────────────────────────────────────────────────────
+
+
 @app.get("/docs", response_class=HTMLResponse)
 def documentation():
     return """
